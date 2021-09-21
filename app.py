@@ -48,13 +48,11 @@ def delete_document_and_put_off_shelf(input_number, notice=f'Документа 
     for doc in documents:
         if doc["number"] == input_number:
             documents.remove(doc)
-            notice = f'Документ с номером: {input_number} удален'
             for value in directories.values():
                 if input_number in value:
                     value.remove(input_number)
-                    notice = f'Документ удален'
+                    notice = f'Документ с номером: {input_number} удален'
     return notice
-
 
 # m [move]
 def delete_document_from_one_shelf_and_put_on_another_shelf(input_number, input_shelf, notice=f'Документа и полки с таким номером не существует'):
@@ -76,16 +74,3 @@ def add_shelf(input_shelf, notice=f'Полка с таким номером уж
         directories[input_shelf] = []
         notice = f'Полка с номером {input_shelf} создана'
     return notice
-
-def check_document_existance(user_doc_number):
-    doc_founded = False
-    for current_document in documents:
-        doc_number = current_document['number']
-        if doc_number == user_doc_number:
-            doc_founded = True
-            break
-    return doc_founded
-
-if __name__ == '__main__':
-    print(get_name_by_document_number('10006'))
-    print(get_shelf_by_document_number('10006'))
